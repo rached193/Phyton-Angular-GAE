@@ -9,9 +9,13 @@ handlers:
   static_files: index.html
   upload: index.html
 
+- url: /node_modules/angular/angular.min.js
+  static_files: node_modules/angular/angular.min.js
+  upload: node_modules/angular
+
 - url: (/.*\.js)
-  static_files: listadetareas.js
-  upload: listadetareas.js
+  static_files: js\1
+  upload: js
 
 - url: (/.*\.css)
   static_files: listadetareas.css

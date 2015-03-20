@@ -1,0 +1,7 @@
+
+{
+	"name": "phyton-angular-gae",
+	"dependencies": {
+		 "angular": "latest"
+	}
+}
