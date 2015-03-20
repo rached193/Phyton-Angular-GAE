@@ -1,0 +1,25 @@
+<!--Comentarios-->
+<div class="panel panel-info widget col-md-offset-3 col-xs-6" style="margin-top: 25px">
+	<h1 align="center">Realiza una búsqueda para empezar</h1>
+	<br/>
+	<div align="center"><img src="img/tombi.gif"/></div>
+	<br/>
+</div>
+<!--Recomendación de series-->
+<div ng-repeat="serie in series" class="row">
+	<section class="col-xs-8 col-md-offset-2">
+		<article class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a href="#/resultado/{{series.indexOf(serie)}}" class="thumbnail"><img src="{{serie.Poster}}" /></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-8 excerpet">
+				<a href="#/resultado/{{series.indexOf(serie)}}" class="thumbnail">
+					<h4>{{serie.Title}}</h4>
+					<h6>{{serie.Year}}</h6>
+					<p>{{serie.Plot}}</p>
+				</a>
+			</div>
+		</article>
+		<hr/>
+	</section>
+</div>

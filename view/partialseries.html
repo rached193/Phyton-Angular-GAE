@@ -1,0 +1,18 @@
+<!--Recomendación de series-->
+<div ng-repeat="serie in series" class="row">
+	<section class="col-xs-8 col-md-offset-2">
+		<article class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a href="#/resultado/{{serie.imdbID}}" class="thumbnail"><img src="{{serie.Poster}}" /></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-8 excerpet">
+				<a href="#/resultado/{{serie.imdbID}}" class="thumbnail">
+					<h4>{{serie.Title}}</h4>
+					<h6>{{serie.Year}}</h6>
+					<p>{{serie.Plot}}</p>
+				</a>
+			</div>
+		</article>
+		<hr/>
+	</section>
+</div>

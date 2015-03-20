@@ -1,0 +1,76 @@
+
+<!-- Imagen y sinposis -->
+<div class="media col-md-offset-2 col-xs-8">
+	<div class="pull-left">
+		<img src="{{series.Poster}}"></img>
+	</div>				
+	<div class="media-body" >
+		<ul class="nav nav-pills" style="margin-botton: 10px">
+			<li ng-class="{active:isSelected(1)}">
+				<a  ng-click="selectTab(1)">Sinposis</a>
+			</li>
+			<li ng-class="{active:isSelected(2)}">
+				<a ng-click="selectTab(2)">Cast</a>
+			</li>
+			<li ng-class="{active:isSelected(3)}">
+			<a  ng-click="selectTab(3)">Detalles</a>
+			</li>
+		</ul>
+		<div class="panel panel-default list-group-item" ng-show="isSelected(1)">
+			<p class="container" align="justify">{{series.Plot}} </p>
+		</div>
+		<div class="panel panel-default list-group-item" ng-show="isSelected(2)">
+			<p>{{series.Actors}}</p>
+		</div>
+		<div class="panel panel-default list-group-item" ng-show="isSelected(3)">
+			<ul>
+				<li>Emisión: {{series.Released}}</li>
+				<li>Genero: {{series.Genero}}</li>
+				<li>Director: {{series.Director}}</li>
+				<li>País: {{series.Country}}</li>
+				<li>Nota: {{series.imdbRating}}</li>
+				<li>Idioma: {{series.Language}}</li>
+			</ul>
+		</div>
+		
+	</div>
+</div>
+
+<!-- Añadir comentario-->
+<div class="panel panel-default col-xs-6 col-md-offset-3" style="margin-top: 25px">
+	<form role="form" name="form" novalidate>
+		<div class="form-horizontal">
+			<div class="input-group col-xs-12" style="margin-bottom: 10px; margin-top: 10px">
+				<h4>Escriba su comentario</h4>		
+			</div>
+			<div class="input-group col-xs-6" style="margin-top: 10px">	
+				<textarea type="text" class="form-control" rows="1" placeholder="Titulo" ng-model="newComment.titulo" required></textarea>	
+			</div>
+			<div class="input-group col-xs-12" style="margin-bottom: 10px; margin-top: 10px">	
+				<textarea type="text" class="form-control" rows="3" placeholder="Escriba su comentario" ng-model="newComment.texto" required></textarea>		
+			</div>
+			<div class="col-md-offset-8 col-md-4">
+				<button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled="form.$invalid" style="margin-bottom: 10px" ng-click="agregarComentario(newComment)">Enviar</button>
+			</div>
+		</div>
+</div>
+<!-- Comentarios -->
+<div class="panel panel-default widget col-md-offset-3 col-xs-6" style="margin-top: 25px">
+	<div class="panel-heading row">
+		<h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>Recent Comments</h3>			
+	</div>
+	<div  ng-repeat="com in comment"  class="panel-body">
+		<ul class="list-group">
+			<li class="list-group-item">
+				<div>
+					<h4>{{com.titulo}}</h4>
+					<h6>{{com.usuario}}, {{com.fecha}} </h6>
+					<div class="panel-default panel">
+						<p align="justify" style="margin: 10px"> {{com.texto}}</p>
+					</div>
+				</div>
+			</li>
+			<br/>
+		</ul>			
+	</div>
+</div>
