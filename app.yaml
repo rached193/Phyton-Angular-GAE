@@ -9,14 +9,28 @@ handlers:
   static_files: index.html
   upload: index.html
 
-- url: /node_modules/angular/angular.min.js
-  static_files: node_modules/angular/angular.min.js
-  upload: node_modules/angular
+- url: /node_modules
+  static_dir: node_modules
 
 - url: (/.*\.js)
   static_files: js\1
   upload: js
 
 - url: (/.*\.css)
-  static_files: listadetareas.css
-  upload: listadetareas.css
+  static_files: css\1
+  upload: css
+
+- url: (/.*\.woff)
+  static_files: css\1
+  upload: css
+
+- url: (/.*\.map)
+  static_files: css\1
+  upload: css
+
+- url: /view
+  static_dir: view
+
+- url: (/.*\.gif)
+  static_files: img\1
+  upload: img
