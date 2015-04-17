@@ -31,6 +31,14 @@ handlers:
 - url: /view
   static_dir: view
 
+- url: (/.*\.ico)
+  static_files: img\1
+  upload: img
+
 - url: (/.*\.gif)
+  static_files: img\1
+  upload: img
+
+- url: (/.*\.jpg)
   static_files: img\1
   upload: img
