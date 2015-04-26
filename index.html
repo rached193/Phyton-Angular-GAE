@@ -31,7 +31,7 @@
 
 -->
 </head>
-<body>
+<body ng-controller="ControladorMain">
 
 
   <!-- Header -->
@@ -47,14 +47,18 @@
       <!--Barra de navegación superior-->
       <nav  id="nav"  role="navigation">
         <ul>
-          <li class="active"><a href="#/index">Inicio</a></li>
-          <li><a href="#/index">Noticias</a></li>
-          <li><a href="#/index">Foro</a></li>
-          <li><a href="#/login"> Login</a></li>
-          <li><a href="#/signup">sign up</a></li>
+          <li ng-class="{active:isSelected(1)}">
+            <a ng-click="selectTab(1)" href="#/index">Inicio</a></li>
+          <li ng-class="{active:isSelected(2)}">
+            <a ng-click="selectTab(2)" href="#/index">Noticias</a></li>
+          <li ng-class="{active:isSelected(3)}">
+            <a ng-click="selectTab(3)" href="#/index">Foro</a></li>
+          <li ng-class="{active:isSelected(4)}">
+            <a ng-click="selectTab(4)" href="#/login">Login</a></li>
+          <li ng-class="{active:isSelected(5)}">
+            <a ng-click="selectTab(5)" href="#/signup">sign up</a></li>
         </ul>
       </nav>
-
     </div>
   </div>
 
