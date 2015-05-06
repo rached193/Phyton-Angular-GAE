@@ -296,7 +296,7 @@
 	#main
 	{
 		position: relative;
-		background: #fff url(images/overlay.png) repeat;
+		background: #fff url(overlay.png) repeat;
 	}
 
 	.divider

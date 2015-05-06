@@ -42,3 +42,7 @@ handlers:
 - url: (/.*\.jpg)
   static_files: img\1
   upload: img
+
+- url: (/.*\.png)
+  static_files: img\1
+  upload: img
