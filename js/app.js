@@ -2,6 +2,26 @@ var app = angular.module('app-web', [
 	'ngRoute'
 ]);
 
+
+
+
+
+app.factory('queryPortada', function($rootScope, $http, $q) {
+	var deferred = $q.defer();
+	$http.get('rest/query')
+	.success(function(data, status, headers, config) {
+		$rootScope.series = data;
+		/*
+		$rootScope.series = [{Title: 'Full Metal Alchemist', Poster: "full-metal.jpg", Type:"TV", Plot: "Fullmetal Alchemist (鋼の錬金術師 Hagane no Renkinjutsushi?, lit. «el alquimista de acero», también conocida como Full Metal Alchemist, FMA o Hagaren, abreviatura en japonés)"},
+											{Title: 'Arslan Senki: The Heroic Legend of Arslan', Poster: "arslan.jpg", Type:"TV", Plot:"Esta es la historia de los viajes del Príncipe Arislan, el heredero al imperio de Palse. Al principio, Palse y los Lusitanos están en guerra. Mediante la traición, el Reino de Palse cae derrotado por los Lusitanos. "},
+											{Title: 'One piece', Poster:"onepiece.jpg",Type:"TV", Plot:"La serie habla sobre un chico llamado Monkey D. Luffy, en su niñez obtuvo poderes elásticos al comer una Akuma no mi (Fruta del Diablo ). Inspirado por su amigo el pirata Shanks comienza un viaje para alcanzar su sueño: ser el Rey de los Piratas. Ahora recorre los mares con el sueño de atravesar el Grand Line, un mar peligroso y desconocido donde Gol D. Roger (difunto rey de los piratas) escondió el One Piece, un tesoro de proporciones inimaginables y que ha sido por décadas la aspiración de los más poderosos y peligrosos piratas entre quienes hasta el momento ninguno ha logrado obtener"}
+											];
+											*/
+		deferred.resolve();
+	});
+	return deferred.promise;
+});
+
 //Constantes
 var addr = "192.168.1.2:8090";
 var partial = "view/"
@@ -11,14 +31,11 @@ app.config(['$routeProvider',
 	$routeProvider
 		.when("/index", {
 			templateUrl: partial + "partialmain.html",
-			controller: "ControladorPortada"
+			controller: "ControladorPortada",
+			resolve    : { 'portada': 'queryPortada' }
 		})
-		.when("/series/:id", {
-			templateUrl: partial + "partialseries.html",
-			controller: "ControladorSeries"
-		})
-		.when("/resultado/:serieID", {
-			templateUrl: partial + "partialseriesresult.html",
+		.when("/ficha/:serieID", {
+			templateUrl: partial + "partialficha.html",
 			controller: "ControladorResults"
 		})
 		.when("/opciones", {
@@ -34,6 +51,10 @@ app.config(['$routeProvider',
 			templateUrl: partial + "partialsignup.html",
 			controller: "ControladorSignUp"
 		})
+		.when("/insertar", {
+			templateUrl: partial + "partialinsertar.html",
+			controller: "InsertCtrl"
+		})
 		.otherwise({ redirectTo: "/index" });
 	}]);
 
@@ -48,8 +69,32 @@ app.controller("ControladorMain",['$scope',function($scope){
 }]);
 
 app.controller("ControladorPortada",['$scope',function($scope){
-$scope.series = [{Title: 'Full Metal Alchemist', Poster: "full-metal.jpg", Type:"TV", Plot: "Fullmetal Alchemist (鋼の錬金術師 Hagane no Renkinjutsushi?, lit. «el alquimista de acero», también conocida como Full Metal Alchemist, FMA o Hagaren, abreviatura en japonés)"},
-                  {Title: 'Arslan Senki: The Heroic Legend of Arslan', Poster: "arslan.jpg", Type:"TV", Plot:"Esta es la historia de los viajes del Príncipe Arislan, el heredero al imperio de Palse. Al principio, Palse y los Lusitanos están en guerra. Mediante la traición, el Reino de Palse cae derrotado por los Lusitanos. "},
-									{Title: 'One piece', Poster:"onepiece.jpg",Type:"TV", Plot:"La serie habla sobre un chico llamado Monkey D. Luffy, en su niñez obtuvo poderes elásticos al comer una Akuma no mi (Fruta del Diablo ). Inspirado por su amigo el pirata Shanks comienza un viaje para alcanzar su sueño: ser el Rey de los Piratas. Ahora recorre los mares con el sueño de atravesar el Grand Line, un mar peligroso y desconocido donde Gol D. Roger (difunto rey de los piratas) escondió el One Piece, un tesoro de proporciones inimaginables y que ha sido por décadas la aspiración de los más poderosos y peligrosos piratas entre quienes hasta el momento ninguno ha logrado obtener"}
-									];
+}]);
+
+
+app.controller('InsertCtrl', function($scope, $rootScope, $http, $location) {
+
+	$scope.submitInsert = function() {
+		var serie = {
+			id: $scope.serieid,
+			title : $scope.titlea,
+			poster : $scope.poster,
+			typel : $scope.typel,
+			plot : $scope.plot,
+		};
+		$http.post('/rest/insert', serie)
+		.success(function(data, status, headers, config) {
+			$rootScope.series.push(data);
+		});
+		$location.path('/index');
+	}
+});
+
+app.controller("ControladorResults",['$scope','$http','$routeParams', '$route',function($scope, $http, $routeParams, $route){
+	var seriecode =  {keyserie: $routeParams.serieID};
+
+	$http.post('rest/fetch',seriecode).success(function(data, status, headers, config) {
+	$scope.serie = data;
+	});
+
 }]);
