@@ -9,6 +9,13 @@ class Serie(ndb.Model):
   serieid  = ndb.IntegerProperty()
 
 
+class User(ndb.Model):
+  name = ndb.StringProperty()
+  nickname = ndb.StringProperty()
+  email = ndb.StringProperty()
+  passw = ndb.StringProperty()
+
+
 def AllSerie():
   return Serie.query()
 
@@ -32,3 +39,12 @@ def InsertSerie(serieid, title, poster, typel, plot):
 def DeleteSerie(id):
   key = ndb.Key(Serie, id)
   key.delete()
+
+def InsertUser(name, nickname, email, passw):
+    qry = User.query(User.name == name)
+    if qry:
+        #serie = User(name=name, nickname=nickname, email=email, passw=passw)
+        #serie.put()
+        return 1
+    else:
+        return 0

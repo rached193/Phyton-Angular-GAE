@@ -48,10 +48,22 @@ class FetchHandler(RestHandler):
     self.SendJson(r)
 
 
+class SignUpHandler(RestHandler):
+
+    def post(self):
+      r = json.loads(self.request.body)
+      checkres = model.InsertUser(r['name'],r['nickname'], r['email'],r['passw'])
+      if checkres:
+        self.response.write('Todo Correcto')
+      else:
+        self.response.set_status(500)
+
+
 
 APP = webapp2.WSGIApplication([    #Router del Back-End
     ('/rest/query', QueryHandler),
     ('/rest/insert', InsertHandler),
     ('/rest/fetch', FetchHandler),
+    ('/rest/signup', SignUpHandler),
 
 ], debug=True)

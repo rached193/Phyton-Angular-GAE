@@ -48,7 +48,7 @@ app.config(['$routeProvider',
 			templateUrl: partial + "partialnoticias.html"
 		})
 		.when("/signup", {
-			templateUrl: partial + "partialsignup.html",
+			templateUrl: partial + "partialsignupsimple.html",
 			controller: "ControladorSignUp"
 		})
 		.when("/insertar", {
@@ -97,4 +97,31 @@ app.controller("ControladorResults",['$scope','$http','$routeParams', '$route',f
 	$scope.serie = data;
 	});
 
+}]);
+
+
+app.controller("ControladorSignUp", ['$scope','$http', '$location', function($scope, $http, $location){
+
+
+	$scope.update = function(user){
+
+			if (user.pass == user.repass){
+				console.log(user.pass);
+				var checkuser = {
+					name: $scope.user.name,
+					nickname: $scope.user.surname,
+					email: $scope.user.email,
+					passw: $scope.user.pass,
+				};
+				$http.post("/rest/signup",checkuser)
+					.success(function (user){
+						$location.path("/index");
+					})
+					.error(function (){
+						alert("Nombre o email ya registrado.");
+					})
+			}else{
+				alert("Las contraseñas no coinciden");
+			}
+	};
 }]);
