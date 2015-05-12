@@ -4,25 +4,25 @@
       <form ng-submit="submitInsert()">
         <p>
           <label>ID:</label>
-          <input type="number" ng-model="serieid" autofocus="true" />
+          <input type="number" ng-model="serieid" autofocus="true" required/>
         </p>
         <p>
           <label>Title:</label>
-          <input type="text" ng-model="titlea" autofocus="true" />
+          <input type="text" ng-model="titlea" autofocus="true" required/>
         </p>
         <p>
           <label>Poster:</label>
-          <input type="text"  ng-model="poster" />
+          <input type="text"  ng-model="poster" required/>
         </p>
         <p>
           <label>Type:</label>
-          <input type="text"  ng-model="typel" />
+          <input type="text"  ng-model="typel" required />
         </p>
         <p>
           <label>Plot:</label>
-          <input type="text"  ng-model="plot" />
+          <input type="text"  ng-model="plot" required />
         </p>
-        <input type="submit" class="btn" />
+        <input type="submit" class="btn" required />
       </form>
     </div>
   </div>

@@ -48,3 +48,14 @@ def InsertUser(name, nickname, email, passw):
         return 1
     else:
         return 0
+
+def CheckUser(name, passw):
+    qry = User.query(User.name == name)
+    usuario = qry.get()
+    if usuario is None:
+        return None
+    else:
+        if usuario.passw==passw:
+            return usuario.nickname
+        else:
+            return None

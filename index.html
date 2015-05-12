@@ -16,8 +16,9 @@
   <!-- Scripts, cargados al final para mejorar la velocidad de la web?¿?¿? -> mejor no: conexiones lentas se ve el html dinamico-->
 
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src="node_modules/angular/angular.js" type="text/javascript"></script>
-  <script src="node_modules/angular-route/angular-route.js" type="text/javascript" ></script>
+  <script src="node_modules/angular/angular.min.js" type="text/javascript"></script>
+  <script src="node_modules/angular-route/angular-route.min.js" type="text/javascript" ></script>
+  <script src="node_modules/angular-cookies/angular-cookies.min.js" type="text/javascript" ></script>
   <script src="app.js" type="text/javascript"></script>
 
 
@@ -25,7 +26,6 @@
 
 
   <!-- Por implementar
-  <script src="bower_components/angular-cookies/angular-cookies.min.js" type="text/javascript" ></script>
   <script src="node_modules/angular-bootstrap/ui-bootstrap.js" type="text/javascript"></script>
   <script src="node_modules/angular-bootstrap/ui-bootstrap-tpls.js" type="text/javascript"></script>
 
@@ -49,50 +49,60 @@
         <ul>
           <li ng-class="{active:isSelected(1)}">
             <a ng-click="selectTab(1)" href="#/index">Inicio</a></li>
+
             <li ng-class="{active:isSelected(2)}">
               <a ng-click="selectTab(2)" href="#/noticias">Noticias</a></li>
+
               <li ng-class="{active:isSelected(3)}">
                 <a ng-click="selectTab(3)" href="#/index">Foro</a></li>
-                <li ng-class="{active:isSelected(4)}">
-                  <a ng-click="selectTab(4)" href="#/login">Login</a></li>
-                  <li ng-class="{active:isSelected(5)}">
+
+                <li ng-hide="isLogged()" ng-class="{active:isSelected(4)}">
+                  <a  ng-click="selectTab(4)" href="#/login">Login</a></li>
+
+                  <li ng-hide="isLogged()" ng-class="{active:isSelected(5)}">
                     <a ng-click="selectTab(5)" href="#/signup">sign up</a></li>
-                  </ul>
-                </nav>
+
+                    <li ng-show="isLogged()" ng-class="{active:isSelected(4)}">
+                      <a  ng-click="selectTab(4)" href="#/insertar">Insertar</a></li>
+
+                      <li ng-show="isLogged()" ng-class="{active:isSelected(5)}">
+                        <a href="#/" ng-click="logOut()">Log out</a></li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+
+                <!-- Buscador !Desabilitado!
+                <form class="navbar-form navbar-right" role="search" >
+                <div class="form-group">
+                <input type="text" class="form-control" ng-model="sekker"  placeholder="Buscar" />
               </div>
-            </div>
+              <a href="#/series/{{sekker}}"><button type="submit" class="btn btn-default" ng-click="nBusqueda(sekker)">
+              <span class="glyphicon glyphicon-search"></span>
+            </button></a>
+          </form>
+        </nav>
+      -->
+      <!--Cuerpo de la pagina-->
+      <div  ng-view>
+        <!--MIUA MIAU MIAU MIAU-->
 
-            <!-- Buscador !Desabilitado!
-            <form class="navbar-form navbar-right" role="search" >
-            <div class="form-group">
-            <input type="text" class="form-control" ng-model="sekker"  placeholder="Buscar" />
-          </div>
-          <a href="#/series/{{sekker}}"><button type="submit" class="btn btn-default" ng-click="nBusqueda(sekker)">
-          <span class="glyphicon glyphicon-search"></span>
-        </button></a>
-      </form>
-    </nav>
-  -->
-  <!--Cuerpo de la pagina-->
-  <div  ng-view>
-    <!--MIUA MIAU MIAU MIAU-->
+      </div>
 
-  </div>
-
-  <!-- Footer -->
-  <div id="footer">
-    <div class="container">
-      <h1 align="center">El Pacto: En Construccion</h1>
-      <br/>
-      <div align="center"><img class="thumbnail" src="tombi.gif"/></div>
-    </div>
-  </div>
-  <!-- Footer -->
-  <!-- Copyright -->
-  <div id="copyright">
-    <div class="container">
-      Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
-    </div>
-  </div>
-</body>
-</html>
+      <!-- Footer -->
+      <div id="footer">
+        <div class="container">
+          <h1 align="center">El Pacto: En Construccion</h1>
+          <br/>
+          <div align="center"><img class="thumbnail" src="tombi.gif"/></div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <!-- Copyright -->
+      <div id="copyright">
+        <div class="container">
+          Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+        </div>
+      </div>
+    </body>
+    </html>

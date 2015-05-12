@@ -1,5 +1,5 @@
 var app = angular.module('app-web', [
-	'ngRoute'
+	'ngRoute','ngCookies'
 ]);
 
 
@@ -42,7 +42,8 @@ app.config(['$routeProvider',
 			templateUrl: partial + "partialopciones.html"
 		})
 		.when("/login", {
-			templateUrl: partial + "partiallogin.html"
+			templateUrl: partial + "partiallogin.html",
+			controller: "ControladorLogin"
 		})
 		.when("/noticias", {
 			templateUrl: partial + "partialnoticias.html"
@@ -58,8 +59,17 @@ app.config(['$routeProvider',
 		.otherwise({ redirectTo: "/index" });
 	}]);
 
-app.controller("ControladorMain",['$scope',function($scope){
+app.controller("ControladorMain",['$scope','$cookies',function($scope,$cookies){
 	$scope.tab = 1;
+
+	$scope.isLogged = function() {
+		return !angular.isUndefined($cookies.user);
+	};
+
+	//Deslogeamos al usuario
+	$scope.logOut = function(){
+		delete $cookies["user"];
+	};
 	$scope.selectTab = function (setTab){
 		$scope.tab = setTab;
 	};
@@ -87,7 +97,8 @@ app.controller('InsertCtrl', function($scope, $rootScope, $http, $location) {
 			$rootScope.series.push(data);
 		});
 		$location.path('/index');
-	}
+	};
+
 });
 
 app.controller("ControladorResults",['$scope','$http','$routeParams', '$route',function($scope, $http, $routeParams, $route){
@@ -124,4 +135,22 @@ app.controller("ControladorSignUp", ['$scope','$http', '$location', function($sc
 				alert("Las contraseñas no coinciden");
 			}
 	};
+}]);
+
+
+app.controller("ControladorLogin", ['$scope','$http', '$location','$cookies', function($scope, $http, $location,	$cookies){
+
+
+	$scope.submitLogin = function() {
+		var user = {
+			name: $scope.nombre,
+			passw : $scope.pass,
+		};
+		$http.post('/rest/login', user)
+		.success(function(data, status, headers, config) {
+			$cookies.user = data.nickname;
+		});
+		$location.path('/index');
+	};
+
 }]);

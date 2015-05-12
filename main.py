@@ -59,11 +59,23 @@ class SignUpHandler(RestHandler):
         self.response.set_status(500)
 
 
+class LoginHandler(RestHandler):
+
+    def post(self):
+      r = json.loads(self.request.body)
+      checkres = model.CheckUser(r['name'],r['passw'])
+      if checkres is None:
+          self.response.set_status(500)
+      else:
+          self.SendJson({'nickname': checkres})
+
+
 
 APP = webapp2.WSGIApplication([    #Router del Back-End
     ('/rest/query', QueryHandler),
     ('/rest/insert', InsertHandler),
     ('/rest/fetch', FetchHandler),
     ('/rest/signup', SignUpHandler),
+    ('/rest/login', LoginHandler),
 
 ], debug=True)
