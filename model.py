@@ -42,9 +42,9 @@ def DeleteSerie(id):
 
 def InsertUser(name, nickname, email, passw):
     qry = User.query(User.name == name)
-    if qry:
-        #serie = User(name=name, nickname=nickname, email=email, passw=passw)
-        #serie.put()
+    if qry.get() is None:
+        serie = User(name=name, nickname=nickname, email=email, passw=passw)
+        serie.put()
         return 1
     else:
         return 0
