@@ -50,3 +50,7 @@ handlers:
 - url: (/.*\.png)
   static_files: img\1
   upload: img
+
+- url: (/.*\.svg)
+  static_files: img\1
+  upload: img

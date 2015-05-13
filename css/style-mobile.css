@@ -48,14 +48,14 @@
 	{
 		padding: 0em 2em;
 	}
-	
+
 	.button
 	{
 		display: block;
 		width: 100%;
 		text-align: center;
 	}
-	
+
 	header
 	{
 		margin-bottom: 2em;
@@ -65,12 +65,12 @@
 	{
 		letter-spacing: 1px;
 	}
-	
+
 	header .byline
 	{
 		padding-top: 0.50em;
 	}
-	
+
 	ul.style1
 	{
 	}
@@ -78,7 +78,7 @@
 		ul.style1 li
 		{
 			line-height: 1.7em;
-		}	
+		}
 
 		ul.style1 .posted
 		{
@@ -86,9 +86,9 @@
 			margin-top: 0em;
 			padding: 0em;
 		}
-	
-	
-	
+
+
+
 /*********************************************************************************/
 /* UI                                                                            */
 /*********************************************************************************/
@@ -128,7 +128,7 @@
 				position: absolute;
 				left: 25px;
 				top: 20px;
-				background: url('images/mobileUI-site-nav-opener-bg.svg') 0px 0px no-repeat;
+				background: url('mobileUI-site-nav-opener-bg.svg') 0px 0px no-repeat;
 				opacity: 0.50;
 			}
 
@@ -139,7 +139,7 @@
 
 	#navPanel
 	{
-		background: #181818 url(images/overlay.png) repeat;
+		background: #181818 url(overlay.png) repeat;
 	}
 
 		#navPanel .link
@@ -153,12 +153,12 @@
 			padding: 0 1em 0 1em;
 			text-transform: uppercase;
 		}
-		
+
 			#navPanel .link:first-child
 			{
 				border-top: 0;
 			}
-			
+
 			#navPanel .link.depth-0
 			{
 				color: #fff;
@@ -170,7 +170,7 @@
 			#navPanel .indent-4 { display: inline-block; width: 4em; }
 			#navPanel .indent-5 { display: inline-block; width: 5em; }
 			#navPanel .depth-0 { color: #fff; }
-			
+
 /*********************************************************************************/
 /* Header                                                                        */
 /*********************************************************************************/
@@ -189,12 +189,12 @@
 	{
 		margin-bottom: 3em;
 	}
-	
+
 		#logo h1
 		{
 			color: #FFF;
 		}
-	
+
 		#logo h1 a
 		{
 			display: block;
@@ -214,13 +214,13 @@
 			text-transform: uppercase;
 			font-size: 1em;
 			color: #8e8588;
-		}			
-	
+		}
+
 	#nav
 	{
 		display: none;
 	}
-	
+
 /*********************************************************************************/
 /* Main                                                                          */
 /*********************************************************************************/
@@ -233,45 +233,44 @@
 	#content
 	{
 	}
-	
+
 	#content header
 	{
 		margin-bottom: 2em;
 	}
-	
+
 	#content header h2
 	{
 		font-size: 1.8em;
 	}
-	
+
 	#content header .byline
 	{
 	}
-	
+
 	#sidebar h2
 	{
 	}
-	
+
 
 /*********************************************************************************/
 /* Featured                                                                      */
 /*********************************************************************************/
-	
+
 	#featured
 	{
 		padding: 4em 0em 4em 0em;
 	}
-	
+
 /*********************************************************************************/
 /* Footer                                                                        */
 /*********************************************************************************/
-	
+
 	#footer
 	{
 		padding: 4em 0em 2em 0em;
 	}
-	
+
 	#footer h2
 	{
 	}
-	
