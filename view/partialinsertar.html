@@ -1,29 +1,42 @@
 <div id="main">
   <div class="container">
     <div class="row">
-      <form ng-submit="submitInsert()">
-        <p>
-          <label>ID:</label>
-          <input type="number" ng-model="serieid" autofocus="true" required/>
-        </p>
-        <p>
-          <label>Title:</label>
-          <input type="text" ng-model="titlea" autofocus="true" required/>
-        </p>
-        <p>
-          <label>Poster:</label>
-          <input type="text"  ng-model="poster" required/>
-        </p>
-        <p>
-          <label>Type:</label>
-          <input type="text"  ng-model="typel" required />
-        </p>
-        <p>
-          <label>Plot:</label>
-          <input type="text"  ng-model="plot" required />
-        </p>
-        <input type="submit" class="btn" required />
-      </form>
+      <div class="panel panel-default col-xs-6 col-md-offset-3">
+        <form ng-submit="submitInsert()">
+          <div class="input-group" style="margin-top: 10px">
+            <label>Titulo:</label>
+            <p><input type="text" ng-model="titlea" autofocus="true" required/></p>
+          </div>
+          <div class="input-group" style="margin-top: 10px">
+            <label>Poster:</label>
+            <p><input type="text"  ng-model="poster" required/></p>
+          </div>
+          <div class="input-group" style="margin-top: 10px">
+            <label>Tipo:(Manga,TV,Pelicula,OVA)</label>
+            <p><input type="text"  ng-model="typel" required /></p>
+          </div>
+          <div class="input-group" style="margin-top: 10px">
+            <label>Sinopsis:</label>
+            <p><input type="text"  ng-model="plot" required /></p>
+          </div>
+          <div class="input-group" style="margin-top: 10px">
+            <label>Numero de capitulos:</label>
+            <p><input type="number"  ng-model="episodes" /></p>
+          </div>
+          <div class="input-group" style="margin-top: 10px">
+            <label>Genero:</label>
+            <p><input type="text"  ng-model="genres" required /></p>
+          </div>
+          <div class="input-group" style="margin-top: 10px">
+            <label>Fecha de estreno:</label>
+            <p><input type="text"  ng-model="air" required /></p>
+            <div class="input-group" style="margin-top: 10px">
+              <label>Estado:</label>
+            <p><input type="text"  ng-model="estado" required /></p>
+          </div>
+            <input type="submit" class="btn"  />
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-</div>

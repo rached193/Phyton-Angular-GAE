@@ -60,7 +60,9 @@ app.config(['$routeProvider',
 	}]);
 
 app.controller("ControladorMain",['$scope','$cookies',function($scope,$cookies){
-	$scope.tab = 1;
+	$scope.tab = 10;
+
+	$scope.usuario = $cookies.user;
 
 	$scope.isLogged = function() {
 		return !angular.isUndefined($cookies.user);
@@ -91,6 +93,10 @@ app.controller('InsertCtrl', function($scope, $rootScope, $http, $location) {
 			poster : $scope.poster,
 			typel : $scope.typel,
 			plot : $scope.plot,
+			episodes: $scope.episodes,
+			genres: $scope.genres,
+			air: $scope.air,
+			status: $scope.estado,
 		};
 		$http.post('/rest/insert', serie)
 		.success(function(data, status, headers, config) {
@@ -103,7 +109,6 @@ app.controller('InsertCtrl', function($scope, $rootScope, $http, $location) {
 
 app.controller("ControladorResults",['$scope','$http','$routeParams', '$route',function($scope, $http, $routeParams, $route){
 	var seriecode =  {keyserie: $routeParams.serieID};
-
 	$http.post('rest/fetch',seriecode).success(function(data, status, headers, config) {
 	$scope.serie = data;
 	});
@@ -117,7 +122,6 @@ app.controller("ControladorSignUp", ['$scope','$http', '$location', function($sc
 	$scope.update = function(user){
 
 			if (user.pass == user.repass){
-				console.log(user.pass);
 				var checkuser = {
 					name: $scope.user.name,
 					nickname: $scope.user.surname,
@@ -149,8 +153,12 @@ app.controller("ControladorLogin", ['$scope','$http', '$location','$cookies', fu
 		$http.post('/rest/login', user)
 		.success(function(data, status, headers, config) {
 			$cookies.user = data.nickname;
+			$location.path('/index');
+		})
+		.error(function (){
+			alert("Nombre o contraseña incorrectos");
 		});
-		$location.path('/index');
+
 	};
 
 }]);

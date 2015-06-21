@@ -5,8 +5,7 @@ import time
 import model
 
 def AsDict(serie):
-  return {'id': serie.serieid, 'Title': serie.title, 'Poster': serie.poster, 'Typel':serie.typel, 'Plot':serie.plot}
-
+  return {'id': serie.key.id(), 'Title': serie.title, 'Poster': serie.poster, 'Typel':serie.typel, 'Plot':serie.plot ,'episodes':serie.episodes, 'genres':serie.genres , 'air':serie.air,'status':serie.status}
 
 
 class RestHandler(webapp2.RequestHandler):
@@ -33,7 +32,7 @@ class InsertHandler(RestHandler):
 
   def post(self):
     r = json.loads(self.request.body)
-    serie = model.InsertSerie(r['id'],r['title'], r['poster'],r['typel'],r['plot'])
+    serie = model.InsertSerie(0,r['title'], r['poster'],r['typel'],r['plot'],r['episodes'],r['genres'],r['air'],r['status'])
     r = AsDict(serie)
     self.SendJson(r)
 
@@ -42,8 +41,7 @@ class FetchHandler(RestHandler):
 
   def post(self):
     r = json.loads(self.request.body)
-    seriecode = r['keyserie']
-    serie = model.FetchSerie(seriecode);
+    serie = model.FetchSerie(r['keyserie']);
     r = AsDict(serie)
     self.SendJson(r)
 

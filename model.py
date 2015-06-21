@@ -7,6 +7,11 @@ class Serie(ndb.Model):
   typel = ndb.StringProperty()
   plot = ndb.StringProperty()
   serieid  = ndb.IntegerProperty()
+  episodes  = ndb.IntegerProperty()
+  air = ndb.StringProperty()
+  status = ndb.StringProperty()
+  genres = ndb.StringProperty()
+
 
 
 class User(ndb.Model):
@@ -19,19 +24,21 @@ class User(ndb.Model):
 def AllSerie():
   return Serie.query()
 
-def FetchSerie(keyid):
-    qry = Serie.query(Serie.serieid == string.atoi(keyid))
-    return qry.get()
+def FetchSerie(id):
+    #qry = Serie.query(Serie.serieid == string.atoi(keyid))
+    keyserie = ndb.Key(Serie, int(id))
+    serie = keyserie.get()
+    return serie
 
 
-def UpdateSerie(id, title, poster, typel, plot):
-  serie = Serie(id=id, title=title, poster=poster, typel=typel, plot=plot)
+def UpdateSerie(id, title, poster, typel, plot,episodes,genres,air,status):
+  serie = Serie(id=id, title=title, poster=poster, typel=typel, plot=plot,episodes=episodes,genres=genres,air=air,status=status)
   serie.put()
   return serie
 
 
-def InsertSerie(serieid, title, poster, typel, plot):
-  serie = Serie(serieid=serieid, title=title, poster=poster, typel=typel, plot=plot)
+def InsertSerie(serieid, title, poster, typel, plot,episodes,genres,air,status):
+  serie = Serie(serieid=serieid,poster=poster, typel=typel, plot=plot,episodes=episodes,genres=genres,air=air,status=status)
   serie.put()
   return serie
 

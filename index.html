@@ -53,8 +53,8 @@
             <li ng-class="{active:isSelected(2)}">
               <a ng-click="selectTab(2)" href="#/noticias">Noticias</a></li>
 
-              <li ng-class="{active:isSelected(3)}">
-                <a ng-click="selectTab(3)" href="#/index">Foro</a></li>
+              <li ng-show="isLogged()" ng-class="{active:isSelected(3)}">
+                <a ng-click="selectTab(3)" href="#/cuenta">{{usuario}}</a></li>
 
                 <li ng-hide="isLogged()" ng-class="{active:isSelected(4)}">
                   <a  ng-click="selectTab(4)" href="#/login">Login</a></li>
