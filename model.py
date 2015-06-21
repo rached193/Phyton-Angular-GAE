@@ -30,7 +30,7 @@ class User(ndb.Model):
     list = Listado()
 
 
-
+#<---------METODOS PARA LAS SERIES-------------------->BEGIN
 def AllSerie():
     return Serie.query()
 
@@ -49,7 +49,7 @@ def UpdateSerie(title, poster, typel, plot,episodes,genres,air,status):
 
 #Inserta una serie nueva en la base de datos
 def InsertSerie(title, poster, typel, plot,episodes,genres,air,status):
-    serie = Serie(poster=poster, typel=typel, plot=plot,episodes=episodes,genres=genres,air=air,status=status)
+    serie = Serie(title=title, poster=poster, typel=typel, plot=plot,episodes=episodes,genres=genres,air=air,status=status)
     serie.put()
     return serie
 
@@ -58,6 +58,8 @@ def DeleteSerie(id):
     key = ndb.Key(Serie, id)
     key.delete()
 
+#<---------METODOS PARA LAS SERIES-------------------->END
+#<---------METODOS PARA LOS USUARIOS------------------>BEGIN
 def InsertUser(name, nickname, email, passw):
     qry = User.query(User.name == name)
     if qry.get() is None:
@@ -78,3 +80,20 @@ def CheckUser(name, passw):
             return usuario.nickname
         else:
             return None
+
+#<---------METODOS PARA LOS USUARIOS------------------>END
+#<---------METODOS PARA LAS LISTAS-------------------->BEGIN
+def addtoList(name,serieid):
+    qry = User.query(User.name == name)
+    usuario = qry.get()
+    if usuario is None:
+        return None
+    else:
+        keyserie = ndb.Key(Serie, int(serieid))
+        serie = keyserie.get()
+        if serie is None:
+            return None
+        else:
+            #A IMPLEMENTAR
+
+#<---------METODOS PARA LAS LISTAS-------------------->END

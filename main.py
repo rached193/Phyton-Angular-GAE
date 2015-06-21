@@ -11,7 +11,6 @@ def AsDict(serie):
 class RestHandler(webapp2.RequestHandler):
 
   def dispatch(self):
-    #time.sleep(1)
     super(RestHandler, self).dispatch()
 
 
@@ -67,6 +66,17 @@ class LoginHandler(RestHandler):
       else:
           self.SendJson({'nickname': checkres})
 
+#Peticion para devolver el listado [UserID]
+class ListHandler(RestHandler):
+
+    def post(self):
+        #A IMPLEMENTAR
+
+#Peticion para añadir la serie [SerieID] al listado [UserID]
+class addtoListHandler(RestHandler):
+
+    def post(self):
+        #A IMPLEMENTAR
 
 #Registrar Handlers
 APP = webapp2.WSGIApplication([    #Router del Back-End
@@ -75,5 +85,7 @@ APP = webapp2.WSGIApplication([    #Router del Back-End
     ('/rest/fetch', FetchHandler),
     ('/rest/signup', SignUpHandler),
     ('/rest/login', LoginHandler),
+    ('/rest/list', ListHandler),
+    ('/rest/addtoList', addtoListHandler),
 
 ], debug=True)
