@@ -27,16 +27,16 @@ class QueryHandler(RestHandler):
     r = [ AsDict(serie) for serie in series ]
     self.SendJson(r)
 
-
+#Peticion insertar nueva serie
 class InsertHandler(RestHandler):
 
   def post(self):
     r = json.loads(self.request.body)
-    serie = model.InsertSerie(0,r['title'], r['poster'],r['typel'],r['plot'],r['episodes'],r['genres'],r['air'],r['status'])
+    serie = model.InsertSerie(r['title'], r['poster'],r['typel'],r['plot'],r['episodes'],r['genres'],r['air'],r['status'])
     r = AsDict(serie)
     self.SendJson(r)
 
-
+#Peticion buscar serie por id
 class FetchHandler(RestHandler):
 
   def post(self):
@@ -45,7 +45,7 @@ class FetchHandler(RestHandler):
     r = AsDict(serie)
     self.SendJson(r)
 
-
+#Peticion verificar el login del usuario
 class SignUpHandler(RestHandler):
 
     def post(self):
@@ -56,7 +56,7 @@ class SignUpHandler(RestHandler):
       else:
         self.response.set_status(500)
 
-
+#Peticion crear un nuevo usuario
 class LoginHandler(RestHandler):
 
     def post(self):
@@ -68,7 +68,7 @@ class LoginHandler(RestHandler):
           self.SendJson({'nickname': checkres})
 
 
-
+#Registrar Handlers
 APP = webapp2.WSGIApplication([    #Router del Back-End
     ('/rest/query', QueryHandler),
     ('/rest/insert', InsertHandler),
