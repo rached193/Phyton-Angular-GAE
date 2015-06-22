@@ -18,6 +18,9 @@ app.factory('queryPortada', function($rootScope, $http, $q) {
 var addr = "192.168.1.2:8090";
 var partial = "view/"
 
+/**
+	* ENRUTADOR DE LA PAGINA
+	*/
 app.config(['$routeProvider',
 	function($routeProvider){
 	$routeProvider
@@ -83,7 +86,7 @@ app.controller("ControladorPortada",['$scope',function($scope){
 app.controller('InsertCtrl', function($scope, $rootScope, $http, $location) {
 
 	$scope.submitInsert = function() {
-		var serie = {
+		var serie = { //Preparamos la peticion
 			id: $scope.serieid,
 			title : $scope.titlea,
 			poster : $scope.poster,
@@ -170,5 +173,5 @@ app.controller("ControladorListado",['$scope','$http','$routeParams', '$route',f
 	.success(function(data, status, headers, config) {
 		$scope.listado = data;
 	});
-	
+
 }]);

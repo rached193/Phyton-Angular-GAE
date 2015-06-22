@@ -5,8 +5,10 @@ import time
 import model
 
 def AsDict(serie):
-  return {'id': serie.key.id(), 'Title': serie.title, 'Poster': serie.poster, 'Typel':serie.typel, 'Plot':serie.plot ,'episodes':serie.episodes, 'genres':serie.genres , 'air':serie.air,'status':serie.status}
+  return {'id': serie.key.id(), 'title': serie.title, 'poster': serie.poster, 'typel':serie.typel, 'plot':serie.plot ,'episodes':serie.episodes, 'genres':serie.genres , 'air':serie.air,'status':serie.status}
 
+def AsList(listado):
+    return {'name': listado.seriename, 'score': listado.score, 'typel':listado.typel, 'progress':listado.progress}
 
 class RestHandler(webapp2.RequestHandler):
 
@@ -70,7 +72,13 @@ class LoginHandler(RestHandler):
 class ListHandler(RestHandler):
 
     def post(self):
-        #A IMPLEMENTAR
+         r = json.loads(self.request.body)
+         listados = model.queryList(r['username'])
+         if listados is None:
+             self.response.set_status(500)
+         else:
+             r = [ AsList(listado) for listado in listados ]
+             self.SendJson(r)
 
 #Peticion para añadir la serie [SerieID] al listado [UserID]
 class addtoListHandler(RestHandler):
