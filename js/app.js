@@ -164,6 +164,11 @@ app.controller("ControladorLogin", ['$scope','$http', '$location','$cookies', fu
 
 }]);
 
-app.controller("ControladorResults",['$scope','$http','$routeParams', '$route',function($scope, $http, $routeParams, $route){
-//A IMPLEMENTAR
+app.controller("ControladorListado",['$scope','$http','$routeParams', '$route',function($scope, $http, $routeParams, $route){
+	var usercode =  {keyserie: $routeParams.UserID};
+	$http.post('/rest/list', usercode)
+	.success(function(data, status, headers, config) {
+		$scope.listado = data;
+	});
+	
 }]);
