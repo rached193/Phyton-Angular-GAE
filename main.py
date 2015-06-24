@@ -84,7 +84,13 @@ class ListHandler(RestHandler):
 class addtoListHandler(RestHandler):
 
     def post(self):
-        #A IMPLEMENTAR
+        r = json.loads(self.request.body)
+        listados = model.addtoList(r['username'],r['serieid'])
+        if listados is None:
+             self.response.set_status(500)
+        else:
+            r = [ AsList(listado) for listado in listados ]
+            self.SendJson(r)
 
 #Registrar Handlers
 APP = webapp2.WSGIApplication([    #Router del Back-End

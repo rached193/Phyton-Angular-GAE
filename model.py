@@ -94,7 +94,9 @@ def addtoList(username,serieid):
         if serie is None:
             return None
         else:
-            #A IMPLEMENTAR
+            listadoAux = Listado(serieid=int(serieid), seriename=serie.name, score=5, typel=serie.typel, progress=0)
+            usuario.list.append(listadoAux)
+            return usuario.listado
 def queryList(username):
         qry = User.query(User.name == username)
         usuario = qry.get()
