@@ -1,5 +1,5 @@
 var app = angular.module('app-web', [
-	'ngRoute','ngCookies'
+	'ngRoute','ngCookies', 'ngGrid'
 ]);
 
 
@@ -106,15 +106,21 @@ app.controller('InsertCtrl', function($scope, $rootScope, $http, $location) {
 
 });
 
-app.controller("ControladorResults",['$scope','$http','$routeParams', '$route',function($scope, $http, $routeParams, $route){
+app.controller("ControladorResults",['$scope','$http','$routeParams', '$route','$cookies',function($scope, $http, $routeParams, $route, $cookies){
 	var seriecode =  {keyserie: $routeParams.serieID};
+	var listadocode = {
+		username: $cookies.user,
+		keyserie: $routeParams.serieID
+	};
 
 	$http.post('rest/fetch',seriecode).success(function(data, status, headers, config) {
 	$scope.serie = data;
 	});
 
 	$scope.addtoList = function{
-		//A IMPLEMENTAR
+		$http.post('/rest/addtoList',listadocode).success(function(data, status, headers, config) {
+		//A IMPLEMENTAR CAMBIO EN AÑADIR A LISTA
+		});
 	};
 
 }]);
@@ -173,5 +179,10 @@ app.controller("ControladorListado",['$scope','$http','$routeParams', '$route',f
 	.success(function(data, status, headers, config) {
 		$scope.listado = data;
 	});
+
+	$scope.gridOptions = {
+        data: 'myData',
+        columnDefs: [{field:'name', displayName:'Name'}, {field:'score', displayName:'Score'}, {field:'typel', displayName:'Type'},{field:'progress', displayName:'Progreso'} ]
+    };
 
 }]);

@@ -85,7 +85,7 @@ class addtoListHandler(RestHandler):
 
     def post(self):
         r = json.loads(self.request.body)
-        listados = model.addtoList(r['username'],r['serieid'])
+        listados = model.addtoList(r['username'],r['keyserie'])
         if listados is None:
              self.response.set_status(500)
         else:
