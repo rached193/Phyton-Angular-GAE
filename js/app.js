@@ -61,9 +61,9 @@ app.config(['$routeProvider',
 app.controller("ControladorMain",['$scope','$cookies',function($scope,$cookies){
 	$scope.tab = 10;
 
-	$scope.usuario = $cookies.user;
 
 	$scope.isLogged = function() {
+		$scope.usuario =$cookies.user;
 		return !angular.isUndefined($cookies.user);
 	};
 
@@ -117,7 +117,7 @@ app.controller("ControladorResults",['$scope','$http','$routeParams', '$route','
 	$scope.serie = data;
 	});
 
-	$scope.addtoList = function{
+	$scope.addtoList = function(){
 		$http.post('/rest/addtoList',listadocode).success(function(data, status, headers, config) {
 		//A IMPLEMENTAR CAMBIO EN AÑADIR A LISTA
 		});
@@ -174,15 +174,15 @@ app.controller("ControladorLogin", ['$scope','$http', '$location','$cookies', fu
 }]);
 
 app.controller("ControladorListado",['$scope','$http','$routeParams', '$route',function($scope, $http, $routeParams, $route){
-	var usercode =  {keyserie: $routeParams.UserID};
+	var usercode =  {username: $routeParams.UserID};
 	$http.post('/rest/list', usercode)
 	.success(function(data, status, headers, config) {
 		$scope.listado = data;
 	});
 
 	$scope.gridOptions = {
-        data: 'myData',
-        columnDefs: [{field:'name', displayName:'Name'}, {field:'score', displayName:'Score'}, {field:'typel', displayName:'Type'},{field:'progress', displayName:'Progreso'} ]
+        data: 'listado'
+        //columnDefs: [{field:'name', displayName:'Name'}, {field:'score', displayName:'Score'}, {field:'typel', displayName:'Type'},{field:'progress', displayName:'Progreso'} ]
     };
 
 }]);

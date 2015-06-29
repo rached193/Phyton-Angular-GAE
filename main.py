@@ -5,7 +5,7 @@ import time
 import model
 
 def AsDict(serie):
-  return {'id': serie.key.id(), 'title': serie.title, 'poster': serie.poster, 'typel':serie.typel, 'plot':serie.plot ,'episodes':serie.episodes, 'genres':serie.genres , 'air':serie.air,'status':serie.status}
+    return {'id': serie.key.id(), 'title': serie.title, 'poster': serie.poster, 'typel':serie.typel, 'plot':serie.plot ,'episodes':serie.episodes, 'genres':serie.genres , 'air':serie.air,'status':serie.status}
 
 def AsList(listado):
     return {'name': listado.seriename, 'score': listado.score, 'typel':listado.typel, 'progress':listado.progress}
@@ -80,7 +80,7 @@ class ListHandler(RestHandler):
              r = [ AsList(listado) for listado in listados ]
              self.SendJson(r)
 
-#Peticion para añadir la serie [SerieID] al listado [UserID]
+#Peticion para anyadir la serie SerieID al listado [UserID]
 class addtoListHandler(RestHandler):
 
     def post(self):

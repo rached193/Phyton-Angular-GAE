@@ -27,7 +27,7 @@ class User(ndb.Model):
     nickname = ndb.StringProperty()
     email = ndb.StringProperty()
     passw = ndb.StringProperty()
-    list = ndb.StructuredProperty(Listado, repeated=True)
+    listado = ndb.StructuredProperty(Listado, repeated=True)
 
 
 #<---------METODOS PARA LAS SERIES-------------------->BEGIN
@@ -63,7 +63,7 @@ def DeleteSerie(id):
 def InsertUser(name, nickname, email, passw):
     qry = User.query(User.name == name)
     if qry.get() is None:
-        serie = User(name=name, nickname=nickname, email=email, passw=passw)
+        serie = User(name=name, nickname=nickname, email=email, passw=passw,listado=[])
         serie.put()
         return 1
     else:
@@ -77,14 +77,14 @@ def CheckUser(name, passw):
         return None
     else:
         if usuario.passw==passw:
-            return usuario.nickname
+            return usuario.name
         else:
             return None
 
 #<---------METODOS PARA LOS USUARIOS------------------>END
 #<---------METODOS PARA LAS LISTAS-------------------->BEGIN
-def addtoList(username,serieid):
-    qry = User.query(User.name == username)
+def addtoList(name,serieid):
+    qry = User.query(User.name == name)
     usuario = qry.get()
     if usuario is None:
         return None
@@ -94,9 +94,11 @@ def addtoList(username,serieid):
         if serie is None:
             return None
         else:
-            listadoAux = Listado(serieid=int(serieid), seriename=serie.name, score=5, typel=serie.typel, progress=0)
-            usuario.list.append(listadoAux)
+            listadoAux = Listado(serieid=int(serieid), seriename=serie.title, score=5, typel=serie.typel, progress=0)
+            usuario.listado.append(listadoAux)
+            usuario.put()
             return usuario.listado
+
 def queryList(username):
         qry = User.query(User.name == username)
         usuario = qry.get()
